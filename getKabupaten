@@ -1,0 +1,20 @@
+<?php 
+
+$kiriman = $_POST['id_kabupaten'];
+
+$sql = "SELECT * FROM tb_kecamatan WHERE id_kabupaten = '$kiriman'";
+require_once('koneksi.php');
+//$con=mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
+$r = mysqli_query($con,$sql);
+$result = array();
+
+while($row = mysqli_fetch_array($r))
+{
+
+ array_push($result,array(
+ 	'id_kecamatan' => $row['id_kecamatan'],
+ 	'nama_kecamatan'=>$row['nama_kecamatan']
+    ));
+}
+echo json_encode($result);
+mysqli_close($con);?>
